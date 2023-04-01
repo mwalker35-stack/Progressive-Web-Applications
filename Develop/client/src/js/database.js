@@ -14,18 +14,13 @@ const initdb = async () =>
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => {
-  const contactDb = await openDB('contact', 1);
+  const jateDb = await openDB('contact', 1);
 
   // Create a new transaction and specify the database and data privileges.
-  const tx = contactDb.transaction('contact', 'readwrite');
-
+  const tx = jateDb.transaction('jate', 'readwrite');
   // Open up the desired object store.
-  const store = tx.objectStore('contact');
-
-  // Use the .add() method on the store and pass in the content.
-  const request = store.add({ name: name, home_phone: home, cell_phone: cell, email: email });
-
-  // Get confirmation of the request.
+  const store = tx.objectStore('jate');
+  const request = store.put({id: 1, value: content});
   const result = await request;
   console.log('- data saved to the database', result);
 } 
